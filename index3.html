@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>LIBRARY</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+           
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Roesch Library Stats</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#"  class="tablinks" onclick="funCurrent('currentid')">Current</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="tablinks" onclick="funCurrent('bydayid')">by_day</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="tablinks" onclick="funCurrent('byhourid')">by_hour</a>
+                        </li>
+						<li>
+                            <a href="#"  class="tablinks" onclick="funCurrent('bycomputerid')">by_computer</a>
+                        </li>
+						<li>
+                            <a href="#"  class="tablinks" onclick="funCurrent('byuserid')">by_user</a>
+                        </li>
+						<li>
+							<a href="#" class="tablinks" onclick="funCurrent('byfloorid')">by_floor</a>
+						</li>
+                    </ul>
+					<a href="#secondhomeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Insert Computer</a>
+					<ul class="collapse list-unstyled" id="secondhomeSubmenu">
+                        <li>
+                            <a href="#" onclick="changeDiv('insertid')" >Insert</a>
+                        </li>
+					</ul>
+                </li>
+                </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+			
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+           
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span><-||-></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+				<div class=container-fluid>
+				
+				<form onsubmit = "return false" class="dateform" id="dateform">
+				 FROM:	<input type="date" id="startdatepicker" name="start">
+				
+				 TO:	<input type="date" id="enddatepicker" name="end">
+				
+				
+				<input id="submitbutton" type="submit" onclick="startFun()">
+				</form>
+				</div>
+				
+							
+            </nav>	
+			
+				
+				
+				<div class="hide" id="currentid">	
+					<div class="panel panel-default">	
+					<div class="panel-heading">
+						<h3 class="panel-title">Current Events</h3>	
+							
+					</div>	
+					<div class="panel-body">	
+						
+						<table id="output_current" class="table table-striped table-condensed">	
+						<thead>	
+								<tr>
+								<th>Computer</th>	
+								<th>Event</th>	
+								<th>Time</th>
+								<tr>
+                		</thead>
+                		</table>
+					</div>
+					</div>
+				
+				</div> <!-- / col-md-3 -->	
+				
+				<div class="hide" id="bydayid">
+				<div class="panel panel-default">
+				<div class="panel-heading" id="heading_by_week">
+					<h3 class="panel-title">Logins by Day</h3>
+				</div>
+				<div class="panel-body">
+	
+					<table id="output_by_week" class="table table-striped table-condensed">
+					<thead>
+					<tr>
+					<th>Day</th>
+					<th>Total Logins</th>
+					</tr>
+					</thead>
+					</table>
+	
+					</div>
+					</div>
+					</div>
+					
+				<div class="hide" id="byhourid">
+
+				<div class="panel panel-default">
+				<div class="panel-heading" id="heading_by_hour">
+					<h3 class="panel-title">Logins by Hour</h3>
+				</div>
+				<div class="panel-body">
+	
+				<table id="output_by_hour" class="table table-striped table-condensed">
+				<thead>
+					<tr>
+					<th>Hour</th>
+					<th>Total Logins</th>
+					</tr>
+				</thead>
+				</table>
+	
+				</div>
+				</div>
+				</div>
+				
+				<div class="hide" id="bycomputerid">
+
+				<div class="panel panel-default">
+				<div class="panel-heading" id="heading_by_computer">
+					<h3 class="panel-title">Logins by Computer</h3>
+				</div>
+				<div class="panel-body">
+	
+				<table id="output_by_computer" class="table table-striped table-condensed">
+				<thead>
+					<tr>
+					<th>Computer</th>
+					<th>Total Logins</th>
+					<th>Last Login</th>
+					</tr>
+				</thead>
+				</table>
+	
+				</div>
+				</div>
+				</div>
+				
+				<div class="hide" id="byuserid">
+					<div class="panel panel-default">
+					<div class="panel-heading" id="heading_by_user">
+					<h3 class="panel-title">Logins by Unique User</h3>
+					</div>
+					<div class="panel-body">
+	
+					<table id="output_by_user" class="table table-striped table-condensed">
+						<thead>
+						<tr>
+						<th>Hashed Username</th>
+						<th>Total Logins</th>
+						<th>Last Login</th>
+						</tr>
+						</thead>
+						</table>
+	
+						</div>
+						</div>
+
+						</div>
+					
+					<div class="hide" id="byfloorid">
+						<div class="panel panel-default">
+						<div class="panel-heading" id="heading_by_user">
+						<h3 class="panel-title">Computers used on the floor
+							<input type="text" class="form-control col-md-1" id="forfloornumber"  type="number" value="1" maxlength="1">
+							
+							<input type="submit" class="form-control col-md-1" id="forfloorsubmit" onclick="floorData()"> </input>
+							</h3>
+						</div>
+						
+					<div class="panel-body">
+						<table id="output_by_floor" class="table table-striped table-condensed">
+						<thead>
+						<tr>
+						<th>Computer Name</th>
+						<th>Times Used</th>
+						<th>Floor </th>
+						</tr>
+						</thead>
+						</table>
+					</div>
+					</div>
+					</div>							
+						
+					<div class="hide" id="insertid">
+					<div class="panel panel-default">	
+					<div class="panel-heading">
+						<h3 class="panel-title">Insert Data</h3>	
+							
+					</div>
+					<div class="panel-body">
+					<div class="form-group col-md-3">
+							<label for="forcompname">Computername</label>
+							<input type="text" class="form-control" id="forcompname">
+					</div>
+					<div class="form-group col-md-2">
+							<label for="forcomploc">Computer location</label>
+							<input type="text" class="form-control col-md-4" id="forcomploc" maxlength="1" type="number">
+							<small class="form-text text-muted">type the floor number</small>
+					</div>
+					<div class="form-group col-md-2">
+							<label for="forstatus">Status</label>
+							<input type="text" class="form-control col-md-4" id="forstatus" maxlength="1">
+							<small class="form-text text-muted">1=on  2=off  3=inuse  4=logoff</small>
+					</div>
+					<div class="form-group col-md-2">
+							<label for="foruser">User</label>
+							<input type="text" class="form-control col-md-4" id="foruser" maxlength="1">
+							<small class="form-text text-muted">1=student  2=staff </small>
+					</div>
+					<div class="form-group col-md-2">
+							<label for="fornotes">Notes</label>
+							<input type="text" class="form-control col-md-40" id="fornotes">
+							<small class="form-text text-muted">optional</small>
+					</div>
+					<div class="form-group col-md-3">
+							<input type="submit" class="form-control" id="forsubmit" onclick="modifyData()"> </input>
+					</div>
+					</div>
+				</div>
+				
+
+</div>
+
+</div>
+				
+	
+    
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+				//return false;
+            });
+        });
+		
+	function clearRows(clearid)
+	{
+	var table= document.getElementById(clearid);
+	for(var i = 1;i<table.rows.length;){
+            table.deleteRow(i);
+        }
+
+	}
+	
+	function current(data) {
+		clearRows('output_current');
+		//x = document.getElementById("startdatepicker").value;
+		//y = document.getElementById("enddatepicker").value;
+		if(x==0 && y==0)
+		{
+			x = "2016-05-15";
+			y = "2018-09-15";
+		}
+		var event_state = ['','on','off','in use','logoff'];
+		var table = document.getElementById('output_current');
+		for(var i = 0; i < data.length; i++) {
+		if(data[i].timestamp>= x && data[i].timestamp<= y ){
+		var row = table.insertRow(),
+			cell0 = row.insertCell(0),
+			cell1 = row.insertCell(1),
+			cell2 = row.insertCell(2),
+			cell0_text = document.createTextNode( data[i].computer ),
+			cell1_text = document.createTextNode( event_state[data[i].event]);
+			//console.log(data[i].timestamp);
+			cell2_text = document.createTextNode( data[i].timestamp);
+		
+		cell0.appendChild(cell0_text);
+		cell1.appendChild(cell1_text);
+		cell2.appendChild(cell2_text);
+		}
+		}
+		}
+	function by_weekday(data){
+	clearRows('output_by_week');
+	var total_logins = 0;
+	
+	var table = document.getElementById('output_by_week');
+	// weekday index for date (0 = Monday, 1 = Tuesday, … 6 = Sunday).
+	var weekdays = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+	//console.log(JSON.stringify(data, undefined, 2));
+	for(var i = 0; i < data.length; i++) {
+		var row = table.insertRow(),
+			cell0 = row.insertCell(0),
+			cell1 = row.insertCell(1),
+			cell0_text = document.createTextNode( weekdays[data[i].weekday] ),
+			cell1_text = document.createTextNode( data[i].count.toLocaleString());
+		
+		cell0.appendChild(cell0_text);
+		cell1.appendChild(cell1_text);
+				
+		total_logins += data[i].count;
+	}
+	
+	var heading_div = document.createElement('div');
+	heading_div.innerHTML = '(total logins: ' + 
+		total_logins.toLocaleString() + ')';
+	document.getElementById('output_by_week').insertRow().insertCell(0).appendChild(heading_div);
+	}
+	
+	function by_hour(data) {
+	clearRows('output_by_hour');
+	var total_logins = 0;
+	
+	var table = document.getElementById('output_by_hour');
+	for(var i = 0; i < data.length; i++) {
+		var row = table.insertRow(),
+			cell0 = row.insertCell(0),
+			cell1 = row.insertCell(1),
+			cell0_text = document.createTextNode( data[i].hour ),
+			cell1_text = document.createTextNode( data[i].count.toLocaleString() );
+		
+		cell0.appendChild(cell0_text);
+		cell1.appendChild(cell1_text);
+		
+		total_logins += data[i].count;
+	}
+	var heading_div = document.createElement('div');
+	heading_div.innerHTML = '(total logins: ' + 
+		total_logins.toLocaleString() + ')';
+	document.getElementById('output_by_hour').insertRow().insertCell(0).appendChild(heading_div);
+}
+
+	function by_computer(data) {
+	clearRows('output_by_computer');
+	var total_logins = 0;
+	if(x==0 && y==0)
+		{
+			x = "2017-05-15";
+			y = "2018-09-15";
+		}
+	var table = document.getElementById('output_by_computer');
+	for(var i = 0; i < data.length; i++) {
+	if(data[i].lastlogin>= x && data[i].lastlogin<= y ){
+		var row = table.insertRow(),
+			cell0 = row.insertCell(0),
+			cell1 = row.insertCell(1),
+			cell2 = row.insertCell(2),
+			cell0_text = document.createTextNode( data[i].computername ),
+			cell1_text = document.createTextNode( data[i].count.toLocaleString() ),
+			cell2_text = document.createTextNode( data[i].lastlogin );
+		
+		cell0.appendChild(cell0_text);
+		cell1.appendChild(cell1_text);
+		cell2.appendChild(cell2_text);
+		
+		total_logins += data[i].count;
+	}
+	}
+	var heading_div = document.createElement('div');
+	heading_div.innerHTML = '(logins per computer: ' + 
+		(total_logins / data.length).toFixed(2) + ')';
+	document.getElementById('output_by_computer').insertRow().insertCell(0).appendChild(heading_div);
+	
+}
+
+function by_user(data) {
+clearRows('output_by_user');
+	var total_logins = 0;
+	if(x==0 && y==0)
+		{
+		var year = (new Date().getFullYear());
+			x = "2017-01-01";
+			y = "2018-09-15";
+		}
+	var table = document.getElementById('output_by_user');
+	for(var i = 0; i < data.length; i++) {
+	if(data[i].lastlogin>= x && data[i].lastlogin<= y ){
+		var row = table.insertRow(),
+			cell0 = row.insertCell(0),
+			cell1 = row.insertCell(1),
+			cell2 = row.insertCell(2),
+			cell0_text = document.createTextNode( data[i].user.slice(0,8) + '...' ),
+			cell1_text = document.createTextNode( data[i].count.toLocaleString() ),
+			cell2_text = document.createTextNode( data[i].lastlogin );
+		total_logins += data[i].count;
+		
+		cell0.appendChild(cell0_text);
+		cell1.appendChild(cell1_text);
+		cell2.appendChild(cell2_text);
+		
+		//output += data[i].count.toLocaleString() + ' ' + weekdays[data[i].weekday] + '<br/>';
+	}
+	}
+	var heading_div1 = document.createElement('div');
+	var heading_div2 = document.createElement('div');
+	heading_div1.innerHTML = '(logins per user: ' + 
+		(total_logins / data.length).toFixed(2) + ')';
+	heading_div2.innerHTML = '(total users: ' + data.length.toLocaleString() + ')';
+	document.getElementById('output_by_user').insertRow().insertCell(0).appendChild(heading_div1);
+	document.getElementById('output_by_user').insertRow().insertCell(0).appendChild(heading_div2);
+}
+
+	var fx=1;
+	function by_floor(data) {
+		clearRows('output_by_floor');
+		
+		
+		
+		var table = document.getElementById('output_by_floor');
+		for(var i = 0; i < data.length; i++) {
+		//console.log(data[i].computer_location);
+		if(data[i].computer_location == fx){
+		console.log(data[i].computer_location);
+			var row = table.insertRow(),
+				cell0 = row.insertCell(0),
+				cell1 = row.insertCell(1),
+				cell2 = row.insertCell(2),
+				cell0_text = document.createTextNode( data[i].computername ),
+				cell1_text = document.createTextNode( data[i].count.toLocaleString());
+				cell2_text = document.createTextNode( data[i].computer_location)
+		
+			cell0.appendChild(cell0_text);
+			cell1.appendChild(cell1_text);
+			cell2.appendChild(cell2_text);
+		}
+		}
+		
+}
+
+		
+		var currentKey;
+		var x=0,y=0;
+		function startFun()
+		{
+			
+			 x = document.getElementById("startdatepicker").value;
+			 y = document.getElementById("enddatepicker").value;
+			 if(x==0||y==0)
+			 {
+				alert("please select the dates");
+			 }
+			 else{
+				//alert("showing data from "+x+" to "+y);
+			 }
+			 
+			 //console.log(currentKey.value);
+			 funCurrent(currentKey);
+		}
+		
+		function floorData()
+		{
+			 fx = document.getElementById("forfloornumber").value;
+			//alert(fx);
+			funCurrent(currentKey);
+		}
+
+		function getCallback(id)
+		{
+			if(id=="currentid"){
+			 callback= "current";
+			}
+			else if(id=="bydayid")
+			{
+		     callback= "by_weekday";
+			}
+			else if(id=="byhourid")
+			{
+		     callback= "by_hour";
+			}
+			else if(id=="bycomputerid")
+			{
+		     callback= "by_computer";
+			}
+			else if(id=="byuserid")
+			{
+		     callback= "by_user";
+			}
+			else if(id=="byfloorid")
+			{
+			callback = "by_floor";
+			}
+			return callback;
+		}
+		function funCurrent(id)
+		{
+			
+			var i,tabcontent,callback,query_type;
+			document.getElementById('dateform').style.display = "block";
+			tabcontent = document.getElementsByClassName("hide");
+			for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+			}
+			document.getElementById(id).style.display = "block";
+			
+			callback = getCallback(id);
+			query_type = callback;
+			$.ajax({ 
+            url: "http://localhost/dec/stats/test/lab_request.php",
+            data: {callback, query_type},
+            type: "GET",
+			crossDomain: true,
+			datatype: "jsonp",
+            success: function(output){	
+				
+				window[callback](output);
+				
+                     }              
+				   });
+		//return false;
+			currentKey = id;
+			
+		}
+		function changeDiv(id)
+		{
+			document.getElementById('dateform').style.display = "none";
+			var i,tabcontent,callback,query_type;
+			tabcontent = document.getElementsByClassName("hide");
+			for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+			}
+			document.getElementById(id).style.display = "block";
+		}
+		function modifyData()
+		{
+			
+			
+			var cname = document.getElementById('forcompname').value;
+			var cloc = document.getElementById('forcomploc').value;
+			var cstatus = document.getElementById('forstatus').value;
+			var cuser = document.getElementById('foruser').value;
+			var cnotes = document.getElementById('fornotes').value;
+			if(cname.length == 0){
+			alert("computername field is empty");
+			return;
+			}
+			else if(cloc.length == 0){
+			alert("computer location field is empty");
+			rteurn;
+			}
+			else if(cstatus.length == 0){
+			alert("computer status field is empty");
+			return;}
+			else if(cuser.length == 0){
+			alert("user field is empty");
+			return;}
+			else if(cnotes.length == 0){
+			alert("notes field is empty");
+			return;
+			}
+			
+			//console.log(cname, cloc,cstatus,cnotes ,cuser);
+			
+			$.ajax({ 
+            url: "http://localhost/dec/stats/test/insertdata.php",
+            data: {cname,cloc,cstatus,cuser,cnotes},
+            type: "GET",
+			crossDomain: true,
+			//datatype: "jsonp",
+            success: function(output){	
+				alert(output);
+				document.getElementById('forcompname').value='';
+				document.getElementById('forcomploc').value='';
+				document.getElementById('forstatus').value='';
+				document.getElementById('foruser').value='';
+				document.getElementById('fornotes').value='';
+				
+				
+                     }              
+				   });
+			
+		}
+		funCurrent('currentid');
+		</script>
+		
+</body>
+
+</html>
