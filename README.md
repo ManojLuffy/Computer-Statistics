@@ -5,4 +5,4 @@ Project for University of Dayton
 •	Implemented date sort functionality to display the results between the selected days
 •	Written in Bootstrap, JQuery for front-end and PHP for getting the data from MySQL database.
 
-![images/1.PNG]
+![](images/1.PNG)
